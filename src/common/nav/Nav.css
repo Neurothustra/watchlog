@@ -1,0 +1,15 @@
+.nav {
+	height: 50px;
+}
+
+.nav ul {
+	margin: 0;
+	padding: 0;
+}
+
+.nav ul li {
+	font-size: 0.9em;
+	text-transform: uppercase;
+	display: inline-block;
+	padding-left: 15px;
+}
