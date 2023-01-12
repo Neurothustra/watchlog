@@ -4,17 +4,15 @@ import './Nav.css';
 const Nav: React.FC = () => {
 	return (
 		<div className='nav'>
-			<ul>
-				<li>
-					<a href='/home'>Home</a>
-				</li>
-				<li>
-					<a href='/addmovie'>Add Movie</a>
-				</li>
-				<li>
-					<a href='profile'>Profile</a>
-				</li>
-			</ul>
+			<div className='nav-item'>
+				<a href='/home'>Home</a>
+			</div>
+			<div className='nav-item'>
+				<a href='/addmovie'>Add Movie</a>
+			</div>
+			<div className='nav-item'>
+				<a href='profile'>Profile</a>
+			</div>
 		</div>
 	);
 };
