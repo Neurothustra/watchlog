@@ -21,4 +21,5 @@ export interface IMovieProfile {
 	imdbRating: string;
 	imdbVotes: string;
 	totalSeasons: string;
+	Error: string;
 }

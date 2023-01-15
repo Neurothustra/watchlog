@@ -8,6 +8,8 @@ const firebaseConfig = {
 	appId: process.env.REACT_APP_APP_ID,
 };
 
+debugger;
+
 let instance = null;
 
 export default function getFirebase() {

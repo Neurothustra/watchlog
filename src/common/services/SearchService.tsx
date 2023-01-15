@@ -1,11 +1,18 @@
-const omdbSearch = (req: string) => {
+const omdbSearch = (titleReq: string, yearReq?: string) => {
 	try {
 		let searchResult;
+		const omdbKey = process.env.REACT_APP_OMDB_KEY;
+		const titleSearch = `t=${titleReq}`;
+		const yearSearch = `y=${yearReq}`;
 
-		if (req) {
-			const omdbKey = process.env.REACT_APP_OMDB_KEY;
-			let titleSearch = `t=${req}`;
+		if (titleReq && !yearReq) {
 			const url = `http://www.omdbapi.com/?${titleSearch}&apikey=${omdbKey}`;
+
+			searchResult = getData(url);
+
+			return searchResult;
+		} else if (titleReq && yearReq) {
+			const url = `http://www.omdbapi.com/?${titleSearch}&${yearSearch}&apikey=${omdbKey}`;
 
 			searchResult = getData(url);
 
