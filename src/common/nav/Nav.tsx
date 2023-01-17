@@ -11,7 +11,7 @@ const Nav: React.FC = () => {
 				<a href='/addmovie'>Add Movie</a>
 			</div>
 			<div className='nav-item'>
-				<a href='profile'>Profile</a>
+				{<a href='profile'>Profile</a>}
 			</div>
 		</div>
 	);

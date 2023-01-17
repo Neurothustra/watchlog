@@ -1,20 +1,61 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
+import { browserSessionPersistence, setPersistence, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../common/services/Firestore';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const Login: React.FC = () => {
+	const navigate = useNavigate();
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
+	const onLogin = (e: any) => {
+		e.preventDefault();
+
+		setPersistence(auth, browserSessionPersistence)
+			.then(() => {
+				return signInWithEmailAndPassword(auth, email, password);
+			})
+			.then(() => {
+				navigate('/');
+			})
+			.catch((error) => {
+				// Handle Errors here.
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(`${errorCode} ${errorMessage}`);
+			});
+	};
 
 	return (
 		<>
-			{/* {user && user.displayName ? (
-				<div>
-					{user.displayName}
-					<button onClick={logout} style={{ paddingLeft: '20px' }}>
-						Sign out
-					</button>
-				</div>
-			) : (
-				<FirebaseAuth />
-			)} */}
+			<main>
+				<section>
+					<div>
+						<form>
+							<div>
+								<label htmlFor='email-address'>Email address</label>
+								<input id='email-address' name='email' type='email' required placeholder='Email address' onChange={(e) => setEmail(e.target.value)} />
+							</div>
+
+							<div>
+								<label htmlFor='password'>Password</label>
+								<input id='password' name='password' type='password' required placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
+							</div>
+
+							<div>
+								<button type='submit' onClick={onLogin}>
+									Login
+								</button>
+							</div>
+						</form>
+
+						<p className='text-sm text-white text-center'>
+							No account yet? <NavLink to='/register'>Register</NavLink>
+						</p>
+					</div>
+				</section>
+			</main>
 		</>
 	);
 };
