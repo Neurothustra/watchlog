@@ -20,7 +20,6 @@ const Login: React.FC = () => {
 				navigate('/');
 			})
 			.catch((error) => {
-				// Handle Errors here.
 				const errorCode = error.code;
 				const errorMessage = error.message;
 				console.log(`${errorCode} ${errorMessage}`);
