@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"firebase": "^9.15.0",
+		"firebase": "^9.16.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router-dom": "^6.6.2",
@@ -36,6 +36,8 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
+		"coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
+		"deploy": "react-scripts build && firebase deploy",
 		"ncu": "ncu -u"
 	},
 	"eslintConfig": {
