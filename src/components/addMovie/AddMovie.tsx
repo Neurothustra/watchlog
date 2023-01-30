@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { omdbSearch } from '../../common/services/SearchService';
+import { movieSearch } from '../../common/services/SearchService';
 import { IMovieProfile } from '../../common/models/IMovieProfile';
+import Review from './review/Review';
 import './AddMovie.css';
 
 const AddMovie: React.FC = () => {
@@ -17,22 +18,26 @@ const AddMovie: React.FC = () => {
 		setYearInput(event.target.value);
 	};
 
-	const handleOnClick = () => {
+	const handleSearch = () => {
 		if (!titleInput) {
 			console.log('Search cannot be empty');
 		} else if (yearInput) {
-			omdbSearch(titleInput, yearInput)?.then((res) => setSearchResult(res));
+			movieSearch(titleInput, yearInput)?.then((res) => setSearchResult(res));
 		} else {
-			omdbSearch(titleInput)?.then((res) => setSearchResult(res));
+			movieSearch(titleInput)?.then((res) => setSearchResult(res));
 		}
 	};
 
 	const handleEnterKeyDown = (event: any) => {
 		if (event.key === 'Enter') {
 			event.preventDefault();
-			handleOnClick();
+			handleSearch();
 		}
 	};
+
+	const handleAddItem = () => {};
+
+	const handleRemoveItem = () => {};
 
 	const renderResults = () => {
 		if (searchResult && searchResult.Error) {
@@ -40,7 +45,30 @@ const AddMovie: React.FC = () => {
 		} else {
 			return (
 				<div>
-					{searchResult.Title} {searchResult.Year}
+					<div className='search-result'>
+						<div className='result-image'>
+							<img src={searchResult.Poster} alt='' />
+						</div>
+						<div className='result-details'>
+							{searchResult.Year} {searchResult.Genre} <br />
+							Director: {searchResult.Director}
+						</div>
+						<div className='result-actions'>
+							<div className='result-action-item'>
+								<button type='button' onClick={handleAddItem}>
+									Add Item
+								</button>
+							</div>
+							<div className='result-action-item'>
+								<button type='button' onClick={handleRemoveItem}>
+									Remove Item
+								</button>
+							</div>
+						</div>
+					</div>
+					<div className='review'>
+						<Review data={searchResult} />
+					</div>
 				</div>
 			);
 		}
@@ -54,7 +82,7 @@ const AddMovie: React.FC = () => {
 			<form noValidate>
 				<input id='search-title' type={'text'} title='search-title' placeholder='title (required)' onChange={handleTitleOnChange} required></input>
 				<input id='search-year' type={'text'} title='search-year' placeholder='year' onChange={handleYearOnChange}></input>
-				<button type='button' onClick={handleOnClick}>
+				<button type='button' onClick={handleSearch}>
 					Search
 				</button>
 			</form>

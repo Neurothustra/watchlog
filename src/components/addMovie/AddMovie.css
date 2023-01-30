@@ -1,0 +1,25 @@
+.search-result {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.result-image img {
+	max-height: 150px;
+}
+
+.result-details {
+	margin-left: 3px;
+}
+
+.result-actions {
+	flex-direction: column;
+	margin-left: 3px;
+	text-align: right;
+}
+
+.review {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

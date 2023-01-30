@@ -1,18 +1,20 @@
-const omdbSearch = (titleReq: string, yearReq?: string) => {
+const movieSearch = (titleReq: string, yearReq?: string) => {
 	try {
 		let searchResult;
 		const omdbKey = process.env.REACT_APP_OMDB_KEY;
 		const titleSearch = `t=${titleReq}`;
 		const yearSearch = `y=${yearReq}`;
+		const titleUrl = `http://www.omdbapi.com/?${titleSearch}&apikey=${omdbKey}`;
+		const titleYearUrl = `http://www.omdbapi.com/?${titleSearch}&${yearSearch}&apikey=${omdbKey}`;
 
 		if (titleReq && !yearReq) {
-			const url = `http://www.omdbapi.com/?${titleSearch}&apikey=${omdbKey}`;
+			const url = titleUrl;
 
 			searchResult = getData(url);
 
 			return searchResult;
 		} else if (titleReq && yearReq) {
-			const url = `http://www.omdbapi.com/?${titleSearch}&${yearSearch}&apikey=${omdbKey}`;
+			const url = titleYearUrl;
 
 			searchResult = getData(url);
 
@@ -21,7 +23,7 @@ const omdbSearch = (titleReq: string, yearReq?: string) => {
 			searchResult = 'No record found';
 		}
 	} catch (error) {
-		console.log('Error in omdbSearch:\n', error);
+		console.log('Error in movie search:\n', error);
 	}
 };
 
@@ -30,4 +32,4 @@ const getData = (req: string) => {
 
 	return data;
 };
-export { omdbSearch };
+export { movieSearch };
